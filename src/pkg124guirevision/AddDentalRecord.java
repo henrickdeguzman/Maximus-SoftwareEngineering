@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author renziverdb
+ * @author renziverdb - git 
  */
 public class AddDentalRecord extends javax.swing.JFrame {
 
