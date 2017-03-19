@@ -54,9 +54,9 @@ public class RowPopup extends JPopupMenu
     public RowPopup(JTable table)
     {
         //create popup items
-        JMenuItem view = new JMenuItem("View This Patient Record");
-        JMenuItem edit = new JMenuItem("Update This Record");
-        JMenuItem delete = new JMenuItem("Delete This Record");
+        JMenuItem view = new JMenuItem("View This Patient's Record");
+        JMenuItem edit = new JMenuItem("Update This Patient's Record");
+        JMenuItem delete = new JMenuItem("Archive This Patient's Record");
         JMenuItem addApp = new JMenuItem("Add Appointment to This Patient");
         
         
@@ -92,7 +92,7 @@ public class RowPopup extends JPopupMenu
             public void actionPerformed(ActionEvent e)
             {
                 
-                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete " + ln + ", " + fn + "?", "", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to archive " + ln + ", " + fn + "?", "", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION)
                 {
                     
@@ -277,7 +277,7 @@ public class RowPopup extends JPopupMenu
 
 
                 dr.setVisible(true); 
-              //  super.dispose();
+                gui.dispose();
                 dr.pack();
 
 

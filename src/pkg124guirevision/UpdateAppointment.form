@@ -157,7 +157,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="addApointment" min="-2" max="-2" attributes="0"/>
+                              <Component id="saveApointment" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -218,7 +218,7 @@
                       <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="addApointment" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveApointment" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="96" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -236,12 +236,12 @@
             <Property name="text" type="java.lang.String" value="Date:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="addApointment">
+        <Component class="javax.swing.JButton" name="saveApointment">
           <Properties>
             <Property name="text" type="java.lang.String" value="SAVE CHANGES"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addApointmentActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveApointmentActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="TimeOfCheckup">

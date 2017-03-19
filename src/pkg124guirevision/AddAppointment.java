@@ -354,7 +354,7 @@ public class AddAppointment extends javax.swing.JFrame {
         {
             String time = jComboBox2.getSelectedItem()+":"+jComboBox3.getSelectedItem()+" "+jComboBox1.getSelectedItem();
             SimpleDateFormat twelve = new SimpleDateFormat("HH:mm");
-            SimpleDateFormat twentyfour = new SimpleDateFormat("HH:mm a");
+            SimpleDateFormat twentyfour = new SimpleDateFormat("hh:mm a");
             timeApp = twelve.format(twentyfour.parse(time))+":00";
         }
         catch(Exception e)

@@ -70,7 +70,8 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         HeaderPatient = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -98,8 +99,10 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Update Dental Record | Diamse - Montero Dental Clinic");
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
                 formWindowClosing(evt);
             }
         });
@@ -116,8 +119,10 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
         jLabel2.setText("D  E  N  T  A  L    C  L  I  N  I  C  ");
 
         GoBackBtn.setText("BACK");
-        GoBackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        GoBackBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 GoBackBtnActionPerformed(evt);
             }
         });
@@ -127,7 +132,7 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
         HeaderPatientLayout.setHorizontalGroup(
             HeaderPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderPatientLayout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
+                .addContainerGap(183, Short.MAX_VALUE)
                 .addGroup(HeaderPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPatientLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,7 +155,7 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(HeaderPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(HeaderPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, -1));
 
         jPanel1.setBackground(new java.awt.Color(41, 128, 185));
 
@@ -171,8 +176,10 @@ public class UpdatePatientRecord extends javax.swing.JFrame {
         jLabel7.setText("CONTACT NUMBER:");
 
         updateDentalRecord.setText("SAVE CHANGES");
-        updateDentalRecord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateDentalRecord.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateDentalRecordActionPerformed(evt);
             }
         });

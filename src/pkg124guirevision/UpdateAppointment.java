@@ -30,7 +30,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
     
     String patId = "";
     SimpleDateFormat twelve = new SimpleDateFormat("HH:mm");
-    SimpleDateFormat twentyfour = new SimpleDateFormat("HH:mm a");
+    SimpleDateFormat twentyfour = new SimpleDateFormat("hh:mm a");
     /**
      * Creates new form AddPatient
      */
@@ -136,7 +136,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
         GoBackBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        addApointment = new javax.swing.JButton();
+        saveApointment = new javax.swing.JButton();
         TimeOfCheckup = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         mid = new javax.swing.JLabel();
@@ -215,12 +215,12 @@ public class UpdateAppointment extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Date:");
 
-        addApointment.setText("SAVE CHANGES");
-        addApointment.addActionListener(new java.awt.event.ActionListener()
+        saveApointment.setText("SAVE CHANGES");
+        saveApointment.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                addApointmentActionPerformed(evt);
+                saveApointmentActionPerformed(evt);
             }
         });
 
@@ -318,7 +318,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addApointment)
+                            .addComponent(saveApointment)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -365,7 +365,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(addApointment)
+                .addComponent(saveApointment)
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
@@ -375,8 +375,8 @@ public class UpdateAppointment extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addApointmentActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addApointmentActionPerformed
-    {//GEN-HEADEREND:event_addApointmentActionPerformed
+    private void saveApointmentActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveApointmentActionPerformed
+    {//GEN-HEADEREND:event_saveApointmentActionPerformed
         int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to save changes ?", "", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION)
         {
@@ -403,7 +403,7 @@ public class UpdateAppointment extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please fill up the date!");
             }
         }
-    }//GEN-LAST:event_addApointmentActionPerformed
+    }//GEN-LAST:event_saveApointmentActionPerformed
 
     private void GoBackBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GoBackBtnActionPerformed
     {//GEN-HEADEREND:event_GoBackBtnActionPerformed
@@ -456,7 +456,6 @@ public class UpdateAppointment extends javax.swing.JFrame {
     private javax.swing.JButton GoBackBtn;
     private javax.swing.JPanel HeaderPatient;
     private javax.swing.JLabel TimeOfCheckup;
-    private javax.swing.JButton addApointment;
     private javax.swing.JLabel contactnumber;
     private javax.swing.JLabel firstname;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -477,5 +476,6 @@ public class UpdateAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel mid;
     private javax.swing.JLabel middle;
     private javax.swing.JLabel patid;
+    private javax.swing.JButton saveApointment;
     // End of variables declaration//GEN-END:variables
 }

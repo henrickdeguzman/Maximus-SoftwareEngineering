@@ -114,7 +114,8 @@ public class AddDentalRecord extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         HeaderPatient = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -203,8 +204,10 @@ public class AddDentalRecord extends javax.swing.JFrame {
         jLabel2.setText("D  E  N  T  A  L    C  L  I  N  I  C  ");
 
         GoBackBtn.setText("BACK");
-        GoBackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        GoBackBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 GoBackBtnActionPerformed(evt);
             }
         });
@@ -268,8 +271,10 @@ public class AddDentalRecord extends javax.swing.JFrame {
         jPanel1.add(amountPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 219, -1));
 
         addPatientInfo.setText("Add Record");
-        addPatientInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addPatientInfo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addPatientInfoActionPerformed(evt);
             }
         });
@@ -282,6 +287,7 @@ public class AddDentalRecord extends javax.swing.JFrame {
         jLabel3.setText("jLabel3");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
+        jLabel4.setBackground(new java.awt.Color(232, 76, 61));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc2.jpg"))); // NOI18N
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 660, -1));
 
@@ -290,57 +296,161 @@ public class AddDentalRecord extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc4.jpg"))); // NOI18N
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 680, -1));
+
+        cbUL8.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-        jPanel2.add(cbUL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+
+        cbUL7.setBackground(new java.awt.Color(232, 76, 61));
+        jPanel2.add(cbUL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+
+        cbUL6.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        cbUL5.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+
+        cbUL4.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
+
+        cbUL3.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
+
+        cbUL2.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
-        jPanel2.add(cbUL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 50, 30, -1));
+
+        cbUL1.setBackground(new java.awt.Color(232, 76, 61));
+        jPanel2.add(cbUL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 50, -1, -1));
+
+        cbUR1.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+
+        cbUR2.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        cbUR3.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+
+        cbUR4.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, -1, -1));
+
+        cbUR5.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
+
+        cbUR6.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, -1, -1));
+
+        cbUR7.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
+
+        cbUR8.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbUR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
+
+        cbLR5.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 30, -1));
+
+        cbULE.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbULE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+
+        cbULD.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbULD, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
+
+        cbULC.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbULC, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+
+        cbULB.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbULB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+
+        cbULA.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbULA, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
+
+        cbURA.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+
+        cbURB.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbURB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
+
+        cbURC.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbURC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, -1));
+
+        cbURD.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbURD, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+
+        cbURE.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbURE, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, -1));
+
+        cbLLE.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLLE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        cbLLD.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLLD, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+
+        cbLLC.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLLC, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
+
+        cbLLB.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLLB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+
+        cbLLA.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLLA, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, -1, -1));
+
+        cbLRA.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLRA, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+
+        cbLRB.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLRB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
+
+        cbLRC.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLRC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
+
+        cbLRD.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLRD, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+
+        cbLRE.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
+
+        cbLL8.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        cbLL7.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+
+        cbLL6.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+
+        cbLL5.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+
+        cbLL4.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
+
+        cbLL3.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
+
+        cbLL2.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
+
+        cbLL1.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 30, -1));
+
+        cbLR1.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 30, -1));
+
+        cbLR2.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 30, -1));
+
+        cbLR3.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 30, -1));
+
+        cbLR4.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 30, -1));
+
+        cbLR6.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
+
+        cbLR7.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, -1, -1));
+
+        cbLR8.setBackground(new java.awt.Color(232, 76, 61));
         jPanel2.add(cbLR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 350));
@@ -348,6 +458,7 @@ public class AddDentalRecord extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addPatientInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientInfoActionPerformed
@@ -505,9 +616,9 @@ public class AddDentalRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_addPatientInfoActionPerformed
 
     private void GoBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackBtnActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        
+//        DentalRecords dr = new DentalRecords();
+//        dr.setVisible(true);
+        super.dispose();
     }//GEN-LAST:event_GoBackBtnActionPerformed
 
     /**

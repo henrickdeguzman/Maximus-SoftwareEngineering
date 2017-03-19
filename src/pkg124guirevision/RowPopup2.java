@@ -70,7 +70,7 @@ public class RowPopup2 extends JPopupMenu
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete " + ln + ", " + fn + "??" ,"",JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to cancel appointment with " + ln + ", " + fn + " in " + time + "??" ,"",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION)
                 {
                     try

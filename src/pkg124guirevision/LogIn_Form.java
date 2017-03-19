@@ -70,7 +70,8 @@ public class LogIn_Form extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         userNameField = new javax.swing.JTextField();
         passWordField = new javax.swing.JPasswordField();
@@ -92,8 +93,10 @@ public class LogIn_Form extends javax.swing.JFrame {
         passWordField.setToolTipText("");
         passWordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         passWordField.setMinimumSize(new java.awt.Dimension(2, 22));
-        passWordField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        passWordField.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 passWordFieldKeyPressed(evt);
             }
         });
@@ -102,8 +105,10 @@ public class LogIn_Form extends javax.swing.JFrame {
         logInButton.setBackground(new java.awt.Color(189, 195, 199));
         logInButton.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         logInButton.setText("LOG IN");
-        logInButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        logInButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 logInButtonActionPerformed(evt);
             }
         });

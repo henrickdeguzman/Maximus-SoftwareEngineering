@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZonedDateTime;
@@ -70,7 +71,7 @@ public class PatientRecords extends javax.swing.JFrame
             String pass = "maximus123";
             con = DriverManager.getConnection(url, user, pass);
             stmt = con.createStatement();
-            //Dental
+            //Patient
             rs = stmt.executeQuery("SELECT * FROM PATIENT_RECORD ORDER BY PATIENT_ID");
             DefaultTableModel model = (DefaultTableModel) dentalResultTable.getModel();
             String[] newPat;
@@ -108,7 +109,10 @@ public class PatientRecords extends javax.swing.JFrame
             Calendar current = Calendar.getInstance();
             System.out.println((current.getTime()).getTime());
             TP_Count1.setText(""+totalPat);
+            
             //Appointment
+            SimpleDateFormat twelve = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat twentyfour = new SimpleDateFormat("hh:mm a");
             rs = stmt.executeQuery("SELECT * FROM APPOINTMENT ORDER BY APP_ID");
             DefaultTableModel model2 = (DefaultTableModel) appointmentTable17.getModel();
             String rowData2[] = new String[8];
@@ -121,7 +125,8 @@ public class PatientRecords extends javax.swing.JFrame
                 rowData2[4] = rs.getString("MIDDLEINITIAL");
                 rowData2[5] = rs.getString("CONTACT_NUMBER");
                 rowData2[6] = rs.getString("VISIT_DATE");
-                rowData2[7] = rs.getString("VISIT_TIME");
+                String time12View = rs.getString("VISIT_TIME");
+                rowData2[7] = twentyfour.format(twelve.parse(time12View));
                 model2.addRow(rowData2);
             }
             clckApp();
@@ -201,29 +206,7 @@ public class PatientRecords extends javax.swing.JFrame
         catch (Exception e)
         {
             System.out.println(e);
-        }
-        
-         try
-        {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            String url = "jdbc:derby://localhost:1527/Dental Clinic";
-            String user = "maximus";
-            String pass = "maximus123";
-            con = DriverManager.getConnection(url, user, pass);
-            stmt = con.createStatement();
-            //Dental
-            
-            
-            
-            
-            
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
-        }
-        
-        
+        }       
          
         try{
             
@@ -246,7 +229,7 @@ public class PatientRecords extends javax.swing.JFrame
                 historyModel.addRow(rowData2);
 
             }
-          //  sort();
+            sort();
             rs2.close();
             stmt2.close();
         }catch (Exception e){
@@ -330,6 +313,18 @@ public class PatientRecords extends javax.swing.JFrame
         //Appoint
         TableRowSorter<DefaultTableModel> sorter2 = new TableRowSorter((DefaultTableModel) appointmentTable17.getModel());
         appointmentTable17.setRowSorter(sorter2);
+        
+        //Archive
+        TableRowSorter<DefaultTableModel> sorter3 = new TableRowSorter((DefaultTableModel) archivePR.getModel());
+        archivePR.setRowSorter(sorter3);
+        TableRowSorter<DefaultTableModel> sorter4 = new TableRowSorter((DefaultTableModel) archiveA.getModel());
+        archiveA.setRowSorter(sorter4);
+        TableRowSorter<DefaultTableModel> sorter5 = new TableRowSorter((DefaultTableModel) archiveDR.getModel());
+        archiveDR.setRowSorter(sorter5);
+        
+        //History
+        TableRowSorter<DefaultTableModel> sorter6 = new TableRowSorter((DefaultTableModel) historyTable.getModel());
+        historyTable.setRowSorter(sorter6);
     }
 
     private boolean isAlpha(String text)
@@ -398,7 +393,7 @@ public class PatientRecords extends javax.swing.JFrame
             {
                 JOptionPane.showMessageDialog(null, "Search Textbox Cannot Be Blank!");
             }
-            else if (searchBy.equals("ID"))
+            else if (searchBy.equals("Patient ID"))
             {
                 if (!isAlpha(searchText))
                 {
@@ -513,7 +508,8 @@ public class PatientRecords extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -593,8 +589,10 @@ public class PatientRecords extends javax.swing.JFrame
         jLabel1.setText("DIAMSE - MONTERO ");
 
         logOutBtn.setText("LOG OUT");
-        logOutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        logOutBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 logOutBtnActionPerformed(evt);
             }
         });
@@ -640,49 +638,62 @@ public class PatientRecords extends javax.swing.JFrame
 
         DentalRecordsPanel.setBackground(new java.awt.Color(239, 249, 247));
 
-        sortDental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Last Name", "First Name", "Middle Initial", "Address", "Contact Number", "Birthday", "Age" }));
+        sortDental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient ID", "Last Name", "First Name", "Middle Initial", "Address", "Contact Number", "Birthday", "Age" }));
 
-        searchDental.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        searchDental.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 searchDentalKeyPressed(evt);
             }
         });
 
         searchBtnDental.setText("Search");
-        searchBtnDental.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchBtnDental.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchBtnDentalActionPerformed(evt);
             }
         });
 
         dentalResultTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Patient ID", "Last Name", "First Name", "MI", "Address", "Contact #", "Birthday", "Age"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(dentalResultTable);
 
         addDentalRecord.setText("Add New Record");
-        addDentalRecord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addDentalRecord.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addDentalRecordActionPerformed(evt);
             }
         });
 
         jButton2.setText("View All");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -732,43 +743,54 @@ public class PatientRecords extends javax.swing.JFrame
 
         AppointmentPanel.setBackground(new java.awt.Color(239, 249, 247));
 
-        sortAppointment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Last Name", "First Name", "Middle Initial", "Address", "Contact Number", "Birthday", "Age" }));
+        sortAppointment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient ID", "Transaction ID", "Last Name", "First Name", "Middle Initial", "Contact Number", "Date", "Time" }));
 
         searchBtnAppointment.setText("Search");
-        searchBtnAppointment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchBtnAppointment.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchBtnAppointmentActionPerformed(evt);
             }
         });
 
         appointmentTable17.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Patient ID", "Transaction ID", "Last Name", "First Name", "MI", "Contact #", "Date", "Time"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         TABLE.setViewportView(appointmentTable17);
 
         jButton3.setText("View All");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -789,7 +811,7 @@ public class PatientRecords extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3))
                     .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         AppointmentPanelLayout.setVerticalGroup(
             AppointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -812,30 +834,38 @@ public class PatientRecords extends javax.swing.JFrame
         DentalArchives.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         archivePR.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Last Name", "First Name", "MI", "Address", "Contact #", "Birthday", "Age", "Date Issued", "Date Archived"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Short.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(archivePR);
-        if (archivePR.getColumnModel().getColumnCount() > 0) {
+        if (archivePR.getColumnModel().getColumnCount() > 0)
+        {
             archivePR.getColumnModel().getColumn(0).setResizable(false);
             archivePR.getColumnModel().getColumn(1).setResizable(false);
             archivePR.getColumnModel().getColumn(2).setResizable(false);
@@ -851,30 +881,38 @@ public class PatientRecords extends javax.swing.JFrame
         DentalArchives.addTab("Patient Records Archive", jScrollPane3);
 
         archiveA.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Transaction ID", "Last Name", "First Name", "MI", "Contact #", "Date", "Time", "Date Archived"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         TABLE2.setViewportView(archiveA);
-        if (archiveA.getColumnModel().getColumnCount() > 0) {
+        if (archiveA.getColumnModel().getColumnCount() > 0)
+        {
             archiveA.getColumnModel().getColumn(0).setResizable(false);
             archiveA.getColumnModel().getColumn(0).setPreferredWidth(15);
             archiveA.getColumnModel().getColumn(1).setResizable(false);
@@ -893,24 +931,30 @@ public class PatientRecords extends javax.swing.JFrame
         jPanel2.setBackground(new java.awt.Color(232, 242, 240));
 
         archiveDR.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Transaction ID", "Tooth No.", "Date", "Description", "Total Amount", "Amount Paid", "Balance Due", "Date Issued", "Date Archived"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         archiveDR.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(archiveDR);
-        if (archiveDR.getColumnModel().getColumnCount() > 0) {
+        if (archiveDR.getColumnModel().getColumnCount() > 0)
+        {
             archiveDR.getColumnModel().getColumn(0).setResizable(false);
             archiveDR.getColumnModel().getColumn(0).setPreferredWidth(15);
             archiveDR.getColumnModel().getColumn(1).setResizable(false);
@@ -931,7 +975,7 @@ public class PatientRecords extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -968,18 +1012,23 @@ public class PatientRecords extends javax.swing.JFrame
         Title.setText("DENTAL STATISTICS");
 
         TABLE4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Months", "New Patient", "Patients", "Total Patient"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -1042,7 +1091,7 @@ public class PatientRecords extends javax.swing.JFrame
             PatientsVisited1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PV1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisited1Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PV_Count1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -1051,7 +1100,7 @@ public class PatientRecords extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisited1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PV_Count1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PV1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1087,7 +1136,7 @@ public class PatientRecords extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TotalPatients1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TP_Count1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TP1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1096,7 +1145,7 @@ public class PatientRecords extends javax.swing.JFrame
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(NewPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1124,18 +1173,23 @@ public class PatientRecords extends javax.swing.JFrame
         jTabbedPane1.addTab("Monthly", jPanel3);
 
         TABLE5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Years", "New Patient", "Patients", "Total Patient"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -1198,7 +1252,7 @@ public class PatientRecords extends javax.swing.JFrame
             PatientsVisitedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisitedLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PV_Count2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -1207,7 +1261,7 @@ public class PatientRecords extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisitedLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PV_Count2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1243,7 +1297,7 @@ public class PatientRecords extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TotalPatientsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TP_Count2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1252,7 +1306,7 @@ public class PatientRecords extends javax.swing.JFrame
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(NewPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1313,23 +1367,29 @@ public class PatientRecords extends javax.swing.JFrame
         historyDateToday.setText(getDate());
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Date", "Event"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(historyTable);
-        if (historyTable.getColumnModel().getColumnCount() > 0) {
+        if (historyTable.getColumnModel().getColumnCount() > 0)
+        {
             historyTable.getColumnModel().getColumn(0).setResizable(false);
             historyTable.getColumnModel().getColumn(1).setResizable(false);
         }
@@ -1348,7 +1408,7 @@ public class PatientRecords extends javax.swing.JFrame
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1365,17 +1425,22 @@ public class PatientRecords extends javax.swing.JFrame
         MainTab.addTab("Transaction History", jPanel4);
 
         jPanel1.setBackground(new java.awt.Color(41, 128, 185));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jPanel1MouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 jPanel1MouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 jPanel1MouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 jPanel1MousePressed(evt);
             }
         });
@@ -1393,20 +1458,21 @@ public class PatientRecords extends javax.swing.JFrame
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
-                .addContainerGap(794, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainTab, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MainTab))
+                .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1528,7 +1594,19 @@ public class PatientRecords extends javax.swing.JFrame
             {
                 JOptionPane.showMessageDialog(null, "Search Textbox Cannot Be Blank!");
             }
-            else if (searchBy2.equals("ID"))
+            else if (searchBy2.equals("Patient ID"))
+            {
+                if (!isAlpha(searchText2))
+                {
+                    col = "PATIENT_ID";
+                    searchAppoint(rs, searchText2, col);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Search text should be numbers");
+                }
+            }
+            else if (searchBy2.equals("Transaction ID"))
             {
                 if (!isAlpha(searchText2))
                 {
@@ -1542,7 +1620,8 @@ public class PatientRecords extends javax.swing.JFrame
             }
             else if (searchBy2.equals("Last Name"))
             {
-
+                col = "LASTNAME";
+                searchAppoint(rs, searchText2, col);
             }
             else if (searchBy2.equals("First Name"))
             {
@@ -1609,13 +1688,14 @@ public class PatientRecords extends javax.swing.JFrame
             model.setRowCount(0);
             while (rs.next())
             {
-                rowData[0] = rs.getString("APP_ID");
-                rowData[1] = rs.getString("LASTNAME");
-                rowData[2] = rs.getString("FIRSTNAME");
-                rowData[3] = rs.getString("MIDDLEINITIAL");
-                rowData[4] = rs.getString("CONTACT_NUMBER");
-                rowData[5] = rs.getString("VISIT_DATE");
-                rowData[6] = rs.getString("VISIT_TIME");
+                rowData[0] = rs.getString("PATIENT_ID");
+                rowData[1] = rs.getString("APP_ID");
+                rowData[2] = rs.getString("LASTNAME");
+                rowData[3] = rs.getString("FIRSTNAME");
+                rowData[4] = rs.getString("MIDDLEINITIAL");
+                rowData[5] = rs.getString("CONTACT_NUMBER");
+                rowData[6] = rs.getString("VISIT_DATE");
+                rowData[7] = rs.getString("VISIT_TIME");
                 model.addRow(rowData);
             }
             clckApp();

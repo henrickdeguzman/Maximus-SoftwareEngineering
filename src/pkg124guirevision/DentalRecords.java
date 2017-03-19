@@ -5,6 +5,8 @@
  */
 package pkg124guirevision;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -16,6 +18,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -75,6 +78,28 @@ public class DentalRecords extends javax.swing.JFrame
         
     }
 
+    private void clckDental()
+    {
+        //create popup
+        final RowPopup3 pop = new RowPopup3(dentalTable);
+
+        //event
+        dentalTable.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent me)
+            {
+                //get data
+                int index = dentalTable.rowAtPoint(me.getPoint());
+                TableModel model = dentalTable.getModel();
+                appId = model.getValueAt(index, 0).toString();
+                //determine right or left
+                if (SwingUtilities.isLeftMouseButton(me))
+                {
+                    pop.show(me.getComponent(), me.getX(), me.getY());
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +107,8 @@ public class DentalRecords extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         HeaderPatient = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -118,8 +144,10 @@ public class DentalRecords extends javax.swing.JFrame
         jLabel2.setText("D  E  N  T  A  L    C  L  I  N  I  C  ");
 
         GoBackBtn.setText("BACK");
-        GoBackBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        GoBackBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 GoBackBtnActionPerformed(evt);
             }
         });
@@ -129,7 +157,7 @@ public class DentalRecords extends javax.swing.JFrame
         HeaderPatientLayout.setHorizontalGroup(
             HeaderPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderPatientLayout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
+                .addContainerGap(193, Short.MAX_VALUE)
                 .addGroup(HeaderPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPatientLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,38 +180,46 @@ public class DentalRecords extends javax.swing.JFrame
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(HeaderPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(HeaderPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
 
         MainPanelPatient.setBackground(new java.awt.Color(41, 128, 185));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth colored v3.jpg"))); // NOI18N
 
         dentalTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Tooth No.", "Date", "Description", "Total Amount", "Amount Paid", "Balance Due"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         dentalTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(dentalTable);
-        if (dentalTable.getColumnModel().getColumnCount() > 0) {
+        if (dentalTable.getColumnModel().getColumnCount() > 0)
+        {
             dentalTable.getColumnModel().getColumn(0).setMaxWidth(50);
             dentalTable.getColumnModel().getColumn(1).setMinWidth(150);
             dentalTable.getColumnModel().getColumn(1).setMaxWidth(150);
@@ -192,22 +228,28 @@ public class DentalRecords extends javax.swing.JFrame
         }
 
         addEntry.setText("Add Entry");
-        addEntry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addEntry.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addEntryActionPerformed(evt);
             }
         });
 
         updateEntry.setText("Update Entry");
-        updateEntry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        updateEntry.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 updateEntryActionPerformed(evt);
             }
         });
 
         archiveEntry.setText("Archive Entry");
-        archiveEntry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        archiveEntry.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 archiveEntryActionPerformed(evt);
             }
         });
@@ -240,35 +282,33 @@ public class DentalRecords extends javax.swing.JFrame
             .addGroup(MainPanelPatientLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MainPanelPatientLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(33, 33, 33)
+                        .addComponent(patientID)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel4)
+                        .addGap(44, 44, 44)
+                        .addComponent(patientLName)
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel6)
+                        .addGap(60, 60, 60)
+                        .addComponent(patientFName)
+                        .addGap(258, 258, 258))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
-                                .addComponent(addEntry)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateEntry)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(archiveEntry)
-                                .addGap(126, 126, 126))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
-                                .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MainPanelPatientLayout.createSequentialGroup()
-                                        .addGap(52, 52, 52)
-                                        .addComponent(jLabel7)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(patientID)
-                                        .addGap(63, 63, 63)
-                                        .addComponent(jLabel4)
-                                        .addGap(44, 44, 44)
-                                        .addComponent(patientLName)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(jLabel6)
-                                        .addGap(60, 60, 60)
-                                        .addComponent(patientFName)))
-                                .addGap(99, 99, 99))))
-                    .addGroup(MainPanelPatientLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(addEntry)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateEntry)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(archiveEntry)
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
+                        .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(MainPanelPatientLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))
                         .addGap(99, 99, 99))))
         );
         MainPanelPatientLayout.setVerticalGroup(
@@ -294,14 +334,18 @@ public class DentalRecords extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(MainPanelPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 500));
+        getContentPane().add(MainPanelPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 710, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void GoBackBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GoBackBtnActionPerformed
     {//GEN-HEADEREND:event_GoBackBtnActionPerformed
-        new PatientRecords().setVisible(true);
+        PatientRecords pr = new PatientRecords();
+        new RowPopup(pr);
+        new RowPopup2(pr);
+        pr.setVisible(true);
         super.dispose();
     }//GEN-LAST:event_GoBackBtnActionPerformed
 
@@ -309,9 +353,8 @@ public class DentalRecords extends javax.swing.JFrame
     {//GEN-HEADEREND:event_addEntryActionPerformed
 
         new AddDentalRecord().setVisible(true);
-       // super.dispose();
+        //super.dispose();
 
-        //CODE HERE
     }//GEN-LAST:event_addEntryActionPerformed
 
     private void archiveEntryActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_archiveEntryActionPerformed
@@ -359,7 +402,7 @@ public class DentalRecords extends javax.swing.JFrame
         }
           
           new UpdateDentalRecord().setVisible(true);
-           // super.dispose();
+          //super.dispose();
     }//GEN-LAST:event_updateEntryActionPerformed
     
     private void transfer(int id, String tn, Object dt, String dn, Double total, Double ap, Double bd, String da)
