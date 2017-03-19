@@ -612,7 +612,10 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         
         UpdateData(tn,sqlDate, description.getText(), Double.parseDouble(totalAmount.getText()),Double.parseDouble(amountPaid.getText()), bal,upId,ts,event );
         
-        new PatientRecords().setVisible(true);
+        PatientRecords pr = new PatientRecords();
+        new RowPopup(pr);
+        new RowPopup2(pr);
+        pr.setVisible(true);
         super.dispose();
     }//GEN-LAST:event_updateInfoActionPerformed
 
