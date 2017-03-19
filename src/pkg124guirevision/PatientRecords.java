@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -103,15 +104,116 @@ public class PatientRecords extends javax.swing.JFrame
                 }
                 rowData[7] = "" + age;
                 model.addRow(rowData);
-                
-
                 totalPat++;
             }
             clck();
             
+            //report
+            rs = stmt.executeQuery("SELECT * FROM PATIENT_RECORD ORDER BY PATIENT_ID");
+            int[] y = new int[totalPat];
+            int[] m = new int[totalPat];
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Calendar current = Calendar.getInstance();
-            System.out.println((current.getTime()).getTime());
-            TP_Count1.setText(""+totalPat);
+            String[] currentTD = df.format(current.getTime()).split(" ");
+            String[] currentDate = currentTD[0].split("-");
+            int newPatMon = 0;
+            for(int i = 0; rs.next(); i++)
+            {
+                java.util.Date d = rs.getDate("DATE_ISSUED");
+                System.out.println(d);
+                newPat = df.format(rs.getString("DATE_ISSUED")).split(" ");
+                datePat = newPat[0].split("-");
+                if(currentDate[0].equals(datePat[0]) && currentDate[1].equals(datePat[1]))
+                {
+                    newPatMon++;
+                }
+                y[i] = Integer.parseInt(datePat[0]);
+                m[i] = Integer.parseInt(datePat[1]);
+            }
+            int[] monthsPat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            for (int i = 0; i < m.length; i++)
+            {
+                switch (m[i])
+                {
+                    case 1:
+                        monthsPat[0]++;
+                        break;
+                    case 2:
+                        monthsPat[1]++;
+                        break;
+                    case 3:
+                        monthsPat[2]++;
+                        break;
+                    case 4:
+                        monthsPat[3]++;
+                        break;
+                    case 5:
+                        monthsPat[4]++;
+                        break;
+                    case 6:
+                        monthsPat[5]++;
+                        break;
+                    case 7:
+                        monthsPat[6]++;
+                        break;
+                    case 8:
+                        monthsPat[7]++;
+                        break;
+                    case 9:
+                        monthsPat[8]++;
+                        break;
+                    case 10:
+                        monthsPat[9]++;
+                        break;
+                    case 11:
+                        monthsPat[10]++;
+                        break;
+                    default:
+                        monthsPat[11]++;
+                }
+            }
+            //set monthly table
+            DefaultTableModel monthly = (DefaultTableModel) TABLE4.getModel();
+            String rowDataMonth[] = new String[2];
+            rowDataMonth[0] = "January";
+            rowDataMonth[1] = "" + monthsPat[0];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "February";
+            rowDataMonth[1] = "" + monthsPat[1];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "March";
+            rowDataMonth[1] = "" + monthsPat[2];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "April";
+            rowDataMonth[1] = "" + monthsPat[3];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "May";
+            rowDataMonth[1] = "" + monthsPat[4];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "June";
+            rowDataMonth[1] = "" + monthsPat[5];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "July";
+            rowDataMonth[1] = "" + monthsPat[6];;
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "August";
+            rowDataMonth[1] = "" + monthsPat[7];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "September";
+            rowDataMonth[1] = "" + monthsPat[8];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "October";
+            rowDataMonth[1] = "" + monthsPat[9];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "November";
+            rowDataMonth[1] = "" + monthsPat[10];
+            monthly.addRow(rowDataMonth);
+            rowDataMonth[0] = "December";
+            rowDataMonth[1] = "" + monthsPat[11];
+            monthly.addRow(rowDataMonth);
+            
+            NP_Count1.setText("" + newPatMon);
+            TP_Count1.setText("" + totalPat);
             
             //Appointment
             rs = stmt.executeQuery("SELECT * FROM APPOINTMENT ORDER BY APP_ID");
@@ -553,7 +655,7 @@ public class PatientRecords extends javax.swing.JFrame
         NewPatients1 = new javax.swing.JLayeredPane();
         NP1 = new javax.swing.JLabel();
         NP_Count1 = new javax.swing.JLabel();
-        PatientsVisited1 = new javax.swing.JLayeredPane();
+        AveIncome = new javax.swing.JLayeredPane();
         PV1 = new javax.swing.JLabel();
         PV_Count1 = new javax.swing.JLabel();
         TotalPatients1 = new javax.swing.JLayeredPane();
@@ -1028,13 +1130,13 @@ public class PatientRecords extends javax.swing.JFrame
             },
             new String []
             {
-                "Months", "Total Patient Per Month"
+                "Months", "Total Patient Per Month", "Total Income Per Month"
             }
         )
         {
             boolean[] canEdit = new boolean []
             {
-                false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex)
@@ -1079,35 +1181,35 @@ public class PatientRecords extends javax.swing.JFrame
                 .addComponent(NP1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
         );
 
-        PatientsVisited1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        AveIncome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         PV1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         PV1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PV1.setText("Patients Visited");
+        PV1.setText("Average Income");
         PV1.setToolTipText("");
 
         PV_Count1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         PV_Count1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PV_Count1.setText("25");
+        PV_Count1.setText("P 0");
         PV_Count1.setToolTipText("");
         PV_Count1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        PatientsVisited1.setLayer(PV1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        PatientsVisited1.setLayer(PV_Count1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        AveIncome.setLayer(PV1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        AveIncome.setLayer(PV_Count1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout PatientsVisited1Layout = new javax.swing.GroupLayout(PatientsVisited1);
-        PatientsVisited1.setLayout(PatientsVisited1Layout);
-        PatientsVisited1Layout.setHorizontalGroup(
-            PatientsVisited1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout AveIncomeLayout = new javax.swing.GroupLayout(AveIncome);
+        AveIncome.setLayout(AveIncomeLayout);
+        AveIncomeLayout.setHorizontalGroup(
+            AveIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PV1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisited1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PV_Count1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+            .addGroup(AveIncomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PV_Count1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        PatientsVisited1Layout.setVerticalGroup(
-            PatientsVisited1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisited1Layout.createSequentialGroup()
+        AveIncomeLayout.setVerticalGroup(
+            AveIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AveIncomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PV_Count1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1162,19 +1264,19 @@ public class PatientRecords extends javax.swing.JFrame
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MonthlyIncome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(NewPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(105, 105, 105)
-                            .addComponent(PatientsVisited1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TotalPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(60, 60, 60)
+                            .addComponent(TotalPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(47, 47, 47)
+                            .addComponent(AveIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))))
                 .addGap(64, 64, 64))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1184,15 +1286,15 @@ public class PatientRecords extends javax.swing.JFrame
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(NewPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(PatientsVisited1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AveIncome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TotalPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(MonthlyIncome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Monthly", jPanel3);
@@ -1204,13 +1306,13 @@ public class PatientRecords extends javax.swing.JFrame
             },
             new String []
             {
-                "Years", "Total Patient"
+                "Years", "Total Patient Per Year", "Total Income Per Year"
             }
         )
         {
             boolean[] canEdit = new boolean []
             {
-                false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex)
@@ -1259,12 +1361,12 @@ public class PatientRecords extends javax.swing.JFrame
 
         PV.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         PV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PV.setText("Patients Visited");
+        PV.setText("Average Income");
         PV.setToolTipText("");
 
         PV_Count2.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         PV_Count2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PV_Count2.setText("25");
+        PV_Count2.setText("P 0");
         PV_Count2.setToolTipText("");
         PV_Count2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1276,10 +1378,10 @@ public class PatientRecords extends javax.swing.JFrame
         PatientsVisitedLayout.setHorizontalGroup(
             PatientsVisitedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientsVisitedLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PV_Count2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+            .addGroup(PatientsVisitedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PV_Count2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         PatientsVisitedLayout.setVerticalGroup(
             PatientsVisitedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1338,18 +1440,18 @@ public class PatientRecords extends javax.swing.JFrame
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addComponent(NewPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PatientsVisited, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(102, 102, 102)
-                            .addComponent(TotalPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(61, 61, 61)
+                            .addComponent(TotalPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(50, 50, 50)
+                            .addComponent(PatientsVisited, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(62, 62, 62))
         );
@@ -1362,13 +1464,13 @@ public class PatientRecords extends javax.swing.JFrame
                         .addComponent(NewPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PatientsVisited, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TotalPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Yearly", jPanel5);
@@ -1831,6 +1933,7 @@ public class PatientRecords extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AppointmentPanel;
     private javax.swing.JPanel ArchivePanel;
+    private javax.swing.JLayeredPane AveIncome;
     private javax.swing.JTabbedPane DentalArchives;
     private javax.swing.JPanel DentalRecordsPanel;
     private javax.swing.JPanel Header;
@@ -1848,7 +1951,6 @@ public class PatientRecords extends javax.swing.JFrame
     private javax.swing.JLabel PV_Count1;
     private javax.swing.JLabel PV_Count2;
     private javax.swing.JLayeredPane PatientsVisited;
-    private javax.swing.JLayeredPane PatientsVisited1;
     private javax.swing.JPanel ReportPanel;
     private javax.swing.JScrollPane TABLE;
     private javax.swing.JScrollPane TABLE2;
