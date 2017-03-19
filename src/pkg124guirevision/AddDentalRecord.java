@@ -481,7 +481,7 @@ public class AddDentalRecord extends javax.swing.JFrame {
       }
       else{
       for(int i=0; i < al.size(); i++){
-          tn+=al.get(0).toString();
+          tn+=al.get(i).toString();
           if(i<al.size()-1){
               tn+=",";
           }

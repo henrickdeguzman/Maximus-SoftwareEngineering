@@ -485,7 +485,7 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
           tn="ALL";
       }else
       for(int i=0; i < al.size(); i++){
-          tn+=al.get(0).toString();
+          tn+=al.get(i).toString();
           if(i<al.size()-1){
               tn+=",";
           }
