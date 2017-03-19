@@ -62,7 +62,7 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
                
                  
                    
-                    description.setText(rs.getString("DESCRIPTION"));
+                    dentalDescription.setText(rs.getString("DESCRIPTION"));
                     totalAmount.setText(rs.getString("TOTAL_AMOUNT"));
                     amountPaid.setText(rs.getString("AMOUNT_PAID"));
                  
@@ -96,7 +96,7 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         totalAmount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        description = new javax.swing.JTextArea();
+        dentalDescription = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         amountPaidLabel = new javax.swing.JLabel();
         amountPaid = new javax.swing.JTextField();
@@ -220,11 +220,11 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         jLabel6.setText("Description:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
-        description.setColumns(20);
-        description.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        description.setLineWrap(true);
-        description.setRows(5);
-        jScrollPane1.setViewportView(description);
+        dentalDescription.setColumns(20);
+        dentalDescription.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        dentalDescription.setLineWrap(true);
+        dentalDescription.setRows(5);
+        jScrollPane1.setViewportView(dentalDescription);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 219, -1));
 
@@ -490,20 +490,39 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
               tn+=",";
           }
       }
-        System.out.println(tn);
+         String description="";
+      double tpay,apay;
+      
+      if(dentalDescription.getText().equals("")){
+          description="";
+          
+      }else description=dentalDescription.getText();
+      
+      if(totalAmount.getText().equals("")){
+          tpay=0;
+      }else tpay = Double.parseDouble(totalAmount.getText());
+  
+       if(amountPaid.getText().equals("")){
+          apay=0;
+      }else apay = Double.parseDouble(amountPaid.getText());
+       
+       int reply = JOptionPane.showConfirmDialog(null, "Are You sure you want to proceed with empty fields?", "", JOptionPane.YES_NO_OPTION);
+       if (reply == JOptionPane.YES_OPTION) {
         
         java.util.Calendar cal = java.util.Calendar.getInstance();
       java.util.Date utilDate = cal.getTime();
       java.sql.Date sqlDate = new Date(utilDate.getTime());
-        Double bal = Double.parseDouble(totalAmount.getText()) - Double.parseDouble(amountPaid.getText());
+        Double bal = tpay-apay;
         
         String ts = ZonedDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM));
         String event = "Updated Dental Record for  Patient # "+patId+" Name: " +ln +", "+fn+".";
         
-        UpdateData(tn,sqlDate, description.getText(), Double.parseDouble(totalAmount.getText()),Double.parseDouble(amountPaid.getText()), bal,upId,ts,event );
+        UpdateData(tn,sqlDate, description, tpay,apay, bal,upId,ts,event );
         
         new PatientRecords().setVisible(true);
         super.dispose();
+       }
+        
     }//GEN-LAST:event_updateInfoActionPerformed
 
     private void GoBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackBtnActionPerformed
@@ -609,7 +628,7 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbURC;
     private javax.swing.JCheckBox cbURD;
     private javax.swing.JCheckBox cbURE;
-    private javax.swing.JTextArea description;
+    private javax.swing.JTextArea dentalDescription;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

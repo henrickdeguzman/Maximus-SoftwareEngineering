@@ -20,6 +20,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static pkg124guirevision.RowPopup.ln;
 
 /**
  *
@@ -487,19 +488,38 @@ public class AddDentalRecord extends javax.swing.JFrame {
       }
       }
       
+      String description="";
+      double tpay,apay;
+      
+      if(dentalDescription.getText().equals("")){
+          description="";
+          
+      }else description=dentalDescription.getText();
+      
+      if(totalAmount.getText().equals("")){
+          tpay=0;
+      }else tpay = Double.parseDouble(totalAmount.getText());
+  
+       if(amountPaid.getText().equals("")){
+          apay=0;
+      }else apay = Double.parseDouble(amountPaid.getText());
+       
+       int reply = JOptionPane.showConfirmDialog(null, "Are You sure you want to proceed with empty fields?", "", JOptionPane.YES_NO_OPTION);
+       if (reply == JOptionPane.YES_OPTION) {
+      
       java.util.Calendar cal = java.util.Calendar.getInstance();
       java.util.Date utilDate = cal.getTime();
       java.sql.Date sqlDate = new Date(utilDate.getTime());
         String ts = ZonedDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM));
         String event = "Added Dental Record for  Patient # "+patId+" Name: " +ln +", "+fn+".";
-        Double bal = Double.parseDouble(totalAmount.getText()) - Double.parseDouble(amountPaid.getText());
-        AddData(tn,sqlDate, dentalDescription.getText(), Double.parseDouble(totalAmount.getText()),Double.parseDouble(amountPaid.getText()), bal,ts,event);
+        Double bal = tpay - apay;
+        AddData(tn,sqlDate, description, tpay,apay, bal,ts,event);
         
       
         
         new PatientRecords().setVisible(true);
         super.dispose();
-        
+       }
         
         
     }//GEN-LAST:event_addPatientInfoActionPerformed
