@@ -156,7 +156,7 @@ public class DentalRecords extends javax.swing.JFrame
 
         MainPanelPatient.setBackground(new java.awt.Color(41, 128, 185));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth colored.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth colored v3.jpg"))); // NOI18N
 
         dentalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,13 +169,27 @@ public class DentalRecords extends javax.swing.JFrame
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         dentalTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(dentalTable);
+        if (dentalTable.getColumnModel().getColumnCount() > 0) {
+            dentalTable.getColumnModel().getColumn(0).setMaxWidth(50);
+            dentalTable.getColumnModel().getColumn(1).setMinWidth(150);
+            dentalTable.getColumnModel().getColumn(1).setMaxWidth(150);
+            dentalTable.getColumnModel().getColumn(3).setMinWidth(150);
+            dentalTable.getColumnModel().getColumn(3).setMaxWidth(150);
+        }
 
         addEntry.setText("Add Entry");
         addEntry.addActionListener(new java.awt.event.ActionListener() {
@@ -224,33 +238,37 @@ public class DentalRecords extends javax.swing.JFrame
         MainPanelPatientLayout.setHorizontalGroup(
             MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelPatientLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
-                        .addComponent(addEntry)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateEntry)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(archiveEntry)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
-                        .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(MainPanelPatientLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(63, 63, 63)
-                                .addComponent(patientID)
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel4)
-                                .addGap(39, 39, 39)
-                                .addComponent(patientLName)
-                                .addGap(64, 64, 64)
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(patientFName))
-                            .addComponent(jLabel3))
+                    .addGroup(MainPanelPatientLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
+                                .addComponent(addEntry)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(updateEntry)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(archiveEntry)
+                                .addGap(126, 126, 126))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelPatientLayout.createSequentialGroup()
+                                .addGroup(MainPanelPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MainPanelPatientLayout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jLabel7)
+                                        .addGap(33, 33, 33)
+                                        .addComponent(patientID)
+                                        .addGap(63, 63, 63)
+                                        .addComponent(jLabel4)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(patientLName)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel6)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(patientFName)))
+                                .addGap(99, 99, 99))))
+                    .addGroup(MainPanelPatientLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
                         .addGap(99, 99, 99))))
         );
         MainPanelPatientLayout.setVerticalGroup(
@@ -273,7 +291,7 @@ public class DentalRecords extends javax.swing.JFrame
                     .addComponent(addEntry)
                     .addComponent(updateEntry)
                     .addComponent(archiveEntry))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(MainPanelPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 500));
