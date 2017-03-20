@@ -387,7 +387,7 @@ public class AddAppointment extends javax.swing.JFrame {
             int selectedhr = Integer.parseInt((String)jComboBox2.getSelectedItem());
             int selectedmin = Integer.parseInt((String)jComboBox3.getSelectedItem());
             
-            if (jComboBox1.getSelectedItem() == "PM"){
+            if (jComboBox1.getSelectedItem() == "PM" && jComboBox2.getSelectedItem() != "12"){
                 selectedhr += 12;
             }
                     
