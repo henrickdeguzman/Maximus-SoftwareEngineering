@@ -11,10 +11,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -59,9 +62,9 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
             {
                 System.out.println(patId+ln+fn);
                
-                    patientToothNum.setText(rs.getString("TOOTH_NO"));
-                    dentalDate.setDate(rs.getDate("PATIENT_DATE"));
-                    description.setText(rs.getString("DESCRIPTION"));
+                 
+                   
+                    dentalDescription.setText(rs.getString("DESCRIPTION"));
                     totalAmount.setText(rs.getString("TOTAL_AMOUNT"));
                     amountPaid.setText(rs.getString("AMOUNT_PAID"));
                  
@@ -92,19 +95,83 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         GoBackBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        totalAmount = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        description = new javax.swing.JTextArea();
+        dentalDescription = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        patientToothNum = new javax.swing.JTextField();
         amountPaidLabel = new javax.swing.JLabel();
-        amountPaid = new javax.swing.JTextField();
         updateInfo = new javax.swing.JButton();
-        dentalDate = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        cbUL8 = new javax.swing.JCheckBox();
+        cbUL7 = new javax.swing.JCheckBox();
+        cbUL6 = new javax.swing.JCheckBox();
+        cbUL5 = new javax.swing.JCheckBox();
+        cbUL4 = new javax.swing.JCheckBox();
+        cbUL3 = new javax.swing.JCheckBox();
+        cbUL2 = new javax.swing.JCheckBox();
+        cbUL1 = new javax.swing.JCheckBox();
+        cbUR1 = new javax.swing.JCheckBox();
+        cbUR2 = new javax.swing.JCheckBox();
+        cbUR3 = new javax.swing.JCheckBox();
+        cbUR4 = new javax.swing.JCheckBox();
+        cbUR5 = new javax.swing.JCheckBox();
+        cbUR6 = new javax.swing.JCheckBox();
+        cbUR7 = new javax.swing.JCheckBox();
+        cbUR8 = new javax.swing.JCheckBox();
+        cbLR5 = new javax.swing.JCheckBox();
+        cbULE = new javax.swing.JCheckBox();
+        cbULD = new javax.swing.JCheckBox();
+        cbULC = new javax.swing.JCheckBox();
+        cbULB = new javax.swing.JCheckBox();
+        cbULA = new javax.swing.JCheckBox();
+        cbURA = new javax.swing.JCheckBox();
+        cbURB = new javax.swing.JCheckBox();
+        cbURC = new javax.swing.JCheckBox();
+        cbURD = new javax.swing.JCheckBox();
+        cbURE = new javax.swing.JCheckBox();
+        cbLLE = new javax.swing.JCheckBox();
+        cbLLD = new javax.swing.JCheckBox();
+        cbLLC = new javax.swing.JCheckBox();
+        cbLLB = new javax.swing.JCheckBox();
+        cbLLA = new javax.swing.JCheckBox();
+        cbLRA = new javax.swing.JCheckBox();
+        cbLRB = new javax.swing.JCheckBox();
+        cbLRC = new javax.swing.JCheckBox();
+        cbLRD = new javax.swing.JCheckBox();
+        cbLRE = new javax.swing.JCheckBox();
+        cbLL8 = new javax.swing.JCheckBox();
+        cbLL7 = new javax.swing.JCheckBox();
+        cbLL6 = new javax.swing.JCheckBox();
+        cbLL5 = new javax.swing.JCheckBox();
+        cbLL4 = new javax.swing.JCheckBox();
+        cbLL3 = new javax.swing.JCheckBox();
+        cbLL2 = new javax.swing.JCheckBox();
+        cbLL1 = new javax.swing.JCheckBox();
+        cbLR1 = new javax.swing.JCheckBox();
+        cbLR2 = new javax.swing.JCheckBox();
+        cbLR3 = new javax.swing.JCheckBox();
+        cbLR4 = new javax.swing.JCheckBox();
+        cbLR6 = new javax.swing.JCheckBox();
+        cbLR7 = new javax.swing.JCheckBox();
+        cbLR8 = new javax.swing.JCheckBox();
+        NumberFormat longFormat = NumberFormat.getIntegerInstance();
+
+        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
+        numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
+        numberFormatter.setAllowsInvalid(false); //this is the key!!
+        numberFormatter.setMinimum(0l); //Optional
+        totalAmount = new javax.swing.JFormattedTextField(numberFormatter);
+        NumberFormat longFormat2 = NumberFormat.getIntegerInstance();
+
+        NumberFormatter numberFormatter2 = new NumberFormatter(longFormat2);
+        numberFormatter2.setValueClass(Long.class); //optional, ensures you will always get a long value
+        numberFormatter2.setAllowsInvalid(false); //this is the key!!
+        numberFormatter2.setMinimum(0l); //Optional
+        amountPaid = new javax.swing.JFormattedTextField(numberFormatter2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Update Dental Record | Diamse - Montero Dental Clinic");
@@ -159,34 +226,30 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         getContentPane().add(HeaderPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(41, 128, 185));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth colored.jpg"))); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Tooth Number:");
-
-        jLabel5.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Date:");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Description:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
-        description.setColumns(20);
-        description.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        description.setLineWrap(true);
-        description.setRows(5);
-        jScrollPane1.setViewportView(description);
+        dentalDescription.setColumns(20);
+        dentalDescription.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        dentalDescription.setLineWrap(true);
+        dentalDescription.setRows(5);
+        jScrollPane1.setViewportView(dentalDescription);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 219, -1));
 
         jLabel7.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Total Amount:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
 
         amountPaidLabel.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         amountPaidLabel.setForeground(new java.awt.Color(255, 255, 255));
         amountPaidLabel.setText("Amount Paid:");
+        jPanel1.add(amountPaidLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, -1, -1));
 
         updateInfo.setText("Update Record");
         updateInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -194,66 +257,79 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
                 updateInfoActionPerformed(evt);
             }
         });
+        jPanel1.add(updateInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, -1, -1));
 
-        dentalDate.setDateFormatString("yyyy-MM-dd");
+        jPanel2.setBackground(new java.awt.Color(232, 76, 61));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(96, 96, 96))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(updateInfo)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(amountPaidLabel)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(totalAmount)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(patientToothNum)
-                            .addComponent(amountPaid)
-                            .addComponent(dentalDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(patientToothNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(dentalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(amountPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(amountPaidLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updateInfo)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc1.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc2.jpg"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 660, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc3.jpg"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 670, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/teeth/tc4.jpg"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 680, -1));
+        jPanel2.add(cbUL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jPanel2.add(cbUL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+        jPanel2.add(cbUL6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        jPanel2.add(cbUL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+        jPanel2.add(cbUL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
+        jPanel2.add(cbUL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
+        jPanel2.add(cbUL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+        jPanel2.add(cbUL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 50, 30, -1));
+        jPanel2.add(cbUR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+        jPanel2.add(cbUR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+        jPanel2.add(cbUR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+        jPanel2.add(cbUR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, -1, -1));
+        jPanel2.add(cbUR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
+        jPanel2.add(cbUR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, -1, -1));
+        jPanel2.add(cbUR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
+        jPanel2.add(cbUR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, -1, -1));
+        jPanel2.add(cbLR5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 30, -1));
+        jPanel2.add(cbULE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        jPanel2.add(cbULD, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
+        jPanel2.add(cbULC, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+        jPanel2.add(cbULB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+        jPanel2.add(cbULA, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
+        jPanel2.add(cbURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+        jPanel2.add(cbURB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
+        jPanel2.add(cbURC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, -1));
+        jPanel2.add(cbURD, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+        jPanel2.add(cbURE, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, -1));
+        jPanel2.add(cbLLE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        jPanel2.add(cbLLD, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+        jPanel2.add(cbLLC, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
+        jPanel2.add(cbLLB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+        jPanel2.add(cbLLA, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, -1, -1));
+        jPanel2.add(cbLRA, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+        jPanel2.add(cbLRB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
+        jPanel2.add(cbLRC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
+        jPanel2.add(cbLRD, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        jPanel2.add(cbLRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
+        jPanel2.add(cbLL8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        jPanel2.add(cbLL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+        jPanel2.add(cbLL6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+        jPanel2.add(cbLL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+        jPanel2.add(cbLL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
+        jPanel2.add(cbLL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
+        jPanel2.add(cbLL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
+        jPanel2.add(cbLL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 30, -1));
+        jPanel2.add(cbLR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 30, -1));
+        jPanel2.add(cbLR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 30, -1));
+        jPanel2.add(cbLR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 30, -1));
+        jPanel2.add(cbLR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 30, -1));
+        jPanel2.add(cbLR6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
+        jPanel2.add(cbLR7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, -1, -1));
+        jPanel2.add(cbLR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 350));
+        jPanel1.add(totalAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 220, -1));
+        jPanel1.add(amountPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 220, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 500));
 
@@ -303,19 +379,197 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
         
     }
     
+      private boolean isAlpha(String text)
+    {
+        char[] c = text.toCharArray();
+        for (char ch : c)
+        {
+            if (!Character.isLetter(ch))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+     
     private void updateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateInfoActionPerformed
         // TODO add your handling code here:
+        ArrayList al = new ArrayList();
+      if(cbLL1.isSelected()){
+          al.add("LL1");
+      } if(cbLL2.isSelected()){
+          al.add("LL2");
+      } if(cbLL3.isSelected()){
+          al.add("LL3");
+      } if(cbLL4.isSelected()){
+          al.add("LL4");
+      } if(cbLL5.isSelected()){
+          al.add("LL5");
+      } if(cbLL6.isSelected()){
+          al.add("LL6");
+      }  if(cbLL7.isSelected()){
+          al.add("LL7");
+      }  if(cbLL8.isSelected()){
+          al.add("LL8");
+      } if(cbLLA.isSelected()){
+          al.add("LLA");
+      } if(cbLLB.isSelected()){
+          al.add("LLB");
+      } if(cbLLC.isSelected()){
+          al.add("LLC");
+      } if(cbLLD.isSelected()){
+          al.add("LLD");
+      } if(cbLLE.isSelected()){
+          al.add("LLE");
+      } if(cbLR1.isSelected()){
+          al.add("LR1");
+      } if(cbLR2.isSelected()){
+          al.add("LR2");
+      } if(cbLR3.isSelected()){
+          al.add("LR3");
+      } if(cbLR4.isSelected()){
+          al.add("LR4");
+      } if(cbLR5.isSelected()){
+          al.add("LR5");
+      } if(cbLR6.isSelected()){
+          al.add("LR6");
+      } if(cbLR7.isSelected()){
+          al.add("LR7");
+      } if(cbLR8.isSelected()){
+          al.add("LR8");
+      } if(cbLRA.isSelected()){
+          al.add("LRA");
+      } if(cbLRB.isSelected()){
+          al.add("LRB");
+      } if(cbLRC.isSelected()){
+          al.add("LRC");
+      } if(cbLRD.isSelected()){
+          al.add("LRD");
+      } if(cbLRE.isSelected()){
+          al.add("LRE");
+      }
+      if(cbUL1.isSelected()){
+          al.add("UL1");
+      } if(cbUL2.isSelected()){
+          al.add("UL2");
+      } if(cbUL3.isSelected()){
+          al.add("UL3");
+      } if(cbUL4.isSelected()){
+          al.add("UL4");
+      } if(cbUL5.isSelected()){
+          al.add("UL5");
+      } if(cbUL6.isSelected()){
+          al.add("UL6");
+      }  if(cbUL7.isSelected()){
+          al.add("UL7");
+      }  if(cbUL8.isSelected()){
+          al.add("UL8");
+      } if(cbULA.isSelected()){
+          al.add("ULA");
+      } if(cbULB.isSelected()){
+          al.add("ULB");
+      } if(cbULC.isSelected()){
+          al.add("ULC");
+      } if(cbULD.isSelected()){
+          al.add("ULD");
+      } if(cbULE.isSelected()){
+          al.add("ULE");
+      } if(cbUR1.isSelected()){
+          al.add("UR1");
+      } if(cbUR2.isSelected()){
+          al.add("UR2");
+      } if(cbUR3.isSelected()){
+          al.add("UR3");
+      } if(cbUR4.isSelected()){
+          al.add("UR4");
+      } if(cbUR5.isSelected()){
+          al.add("UR5");
+      } if(cbUR6.isSelected()){
+          al.add("UR6");
+      } if(cbUR7.isSelected()){
+          al.add("UR7");
+      } if(cbUR8.isSelected()){
+          al.add("UR8");
+      } if(cbURA.isSelected()){
+          al.add("URA");
+      } if(cbURB.isSelected()){
+          al.add("URB");
+      } if(cbURC.isSelected()){
+          al.add("URC");
+      } if(cbURD.isSelected()){
+          al.add("URD");
+      } if(cbURE.isSelected()){
+          al.add("URE");
+      }
+          
+          
+          
+      System.out.println(al);
+      String tn = "";
+      
+      if(al.size()==0){
+          al.add("ALL");
+          tn="ALL";
+      }else
+      for(int i=0; i < al.size(); i++){
+          tn+=al.get(i).toString();
+          if(i<al.size()-1){
+              tn+=",";
+          }
+      }
+         String description="";
+      double tpay,apay;
+      
+      if(dentalDescription.getText().equals("")){
+          description="";
+          
+      }else description=dentalDescription.getText();
+      
+      if(totalAmount.getText().equals("")){
+          tpay=0;
+      }else tpay = Double.parseDouble(totalAmount.getText());
+  
+       if(amountPaid.getText().equals("")){
+          apay=0;
+      }else apay = Double.parseDouble(amountPaid.getText());
+       
+        if(amountPaid.getText().equals("")||amountPaid.getText().equals("")||dentalDescription.getText().equals("")){
+       int reply = JOptionPane.showConfirmDialog(null, "Are You sure you want to proceed with empty fields?", "", JOptionPane.YES_NO_OPTION);
+       if (reply == JOptionPane.YES_OPTION) {
         
-          java.sql.Date patDate = new java.sql.Date(dentalDate.getDate().getTime());
-        Double bal = Double.parseDouble(totalAmount.getText()) - Double.parseDouble(amountPaid.getText());
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+      java.util.Date utilDate = cal.getTime();
+      java.sql.Date sqlDate = new Date(utilDate.getTime());
+        Double bal = tpay-apay;
         
         String ts = ZonedDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM));
         String event = "Updated Dental Record for  Patient # "+patId+" Name: " +ln +", "+fn+".";
         
-        UpdateData(patientToothNum.getText(),patDate, description.getText(), Double.parseDouble(totalAmount.getText()),Double.parseDouble(amountPaid.getText()), bal,upId,ts,event );
+        UpdateData(tn,sqlDate, description, tpay,apay, bal,upId,ts,event );
         
         new PatientRecords().setVisible(true);
         super.dispose();
+       }
+      }else if(!isAlpha(amountPaid.getText())|| !isAlpha(amountPaid.getText())){
+             
+      java.util.Calendar cal = java.util.Calendar.getInstance();
+      java.util.Date utilDate = cal.getTime();
+      java.sql.Date sqlDate = new Date(utilDate.getTime());
+        String ts = ZonedDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM));
+        String event = "Added Dental Record for  Patient # "+patId+" Name: " +ln +", "+fn+".";
+        Double bal = tpay - apay;
+       UpdateData(tn,sqlDate, description, tpay,apay, bal,upId,ts,event );
+        
+      
+        
+        new PatientRecords().setVisible(true);
+        super.dispose();
+       }else {
+           JOptionPane.showMessageDialog(null,"Amount should only be in numbers");
+       }
+        
+        
+        
     }//GEN-LAST:event_updateInfoActionPerformed
 
     private void GoBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackBtnActionPerformed
@@ -367,10 +621,61 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GoBackBtn;
     private javax.swing.JPanel HeaderPatient;
-    private javax.swing.JTextField amountPaid;
+    private javax.swing.JFormattedTextField amountPaid;
     private javax.swing.JLabel amountPaidLabel;
-    private com.toedter.calendar.JDateChooser dentalDate;
-    private javax.swing.JTextArea description;
+    private javax.swing.JCheckBox cbLL1;
+    private javax.swing.JCheckBox cbLL2;
+    private javax.swing.JCheckBox cbLL3;
+    private javax.swing.JCheckBox cbLL4;
+    private javax.swing.JCheckBox cbLL5;
+    private javax.swing.JCheckBox cbLL6;
+    private javax.swing.JCheckBox cbLL7;
+    private javax.swing.JCheckBox cbLL8;
+    private javax.swing.JCheckBox cbLLA;
+    private javax.swing.JCheckBox cbLLB;
+    private javax.swing.JCheckBox cbLLC;
+    private javax.swing.JCheckBox cbLLD;
+    private javax.swing.JCheckBox cbLLE;
+    private javax.swing.JCheckBox cbLR1;
+    private javax.swing.JCheckBox cbLR2;
+    private javax.swing.JCheckBox cbLR3;
+    private javax.swing.JCheckBox cbLR4;
+    private javax.swing.JCheckBox cbLR5;
+    private javax.swing.JCheckBox cbLR6;
+    private javax.swing.JCheckBox cbLR7;
+    private javax.swing.JCheckBox cbLR8;
+    private javax.swing.JCheckBox cbLRA;
+    private javax.swing.JCheckBox cbLRB;
+    private javax.swing.JCheckBox cbLRC;
+    private javax.swing.JCheckBox cbLRD;
+    private javax.swing.JCheckBox cbLRE;
+    private javax.swing.JCheckBox cbUL1;
+    private javax.swing.JCheckBox cbUL2;
+    private javax.swing.JCheckBox cbUL3;
+    private javax.swing.JCheckBox cbUL4;
+    private javax.swing.JCheckBox cbUL5;
+    private javax.swing.JCheckBox cbUL6;
+    private javax.swing.JCheckBox cbUL7;
+    private javax.swing.JCheckBox cbUL8;
+    private javax.swing.JCheckBox cbULA;
+    private javax.swing.JCheckBox cbULB;
+    private javax.swing.JCheckBox cbULC;
+    private javax.swing.JCheckBox cbULD;
+    private javax.swing.JCheckBox cbULE;
+    private javax.swing.JCheckBox cbUR1;
+    private javax.swing.JCheckBox cbUR2;
+    private javax.swing.JCheckBox cbUR3;
+    private javax.swing.JCheckBox cbUR4;
+    private javax.swing.JCheckBox cbUR5;
+    private javax.swing.JCheckBox cbUR6;
+    private javax.swing.JCheckBox cbUR7;
+    private javax.swing.JCheckBox cbUR8;
+    private javax.swing.JCheckBox cbURA;
+    private javax.swing.JCheckBox cbURB;
+    private javax.swing.JCheckBox cbURC;
+    private javax.swing.JCheckBox cbURD;
+    private javax.swing.JCheckBox cbURE;
+    private javax.swing.JTextArea dentalDescription;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -378,10 +683,11 @@ public class UpdateDentalRecord extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField patientToothNum;
-    private javax.swing.JTextField totalAmount;
+    private javax.swing.JFormattedTextField totalAmount;
     private javax.swing.JButton updateInfo;
     // End of variables declaration//GEN-END:variables
 }
