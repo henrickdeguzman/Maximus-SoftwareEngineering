@@ -156,6 +156,7 @@ public class LogIn_Form extends javax.swing.JFrame {
                 while(rs.next()){
                     if(userNameField.getText().equals(rs.getString("USERNAME"))){
                         JOptionPane.showMessageDialog(null, "Your password is '" + rs.getString("PASSWORD") + "'");
+                        break;
                     }
                 }
             }
