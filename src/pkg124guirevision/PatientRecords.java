@@ -117,19 +117,19 @@ public class PatientRecords extends javax.swing.JFrame
             String[] currentTD = df.format(current.getTime()).split(" ");
             String[] currentDate = currentTD[0].split("-");
             int newPatMon = 0;
-            for(int i = 0; rs.next(); i++)
-            {
-                java.util.Date d = rs.getDate("DATE_ISSUED");
-                System.out.println(d);
-                newPat = df.format(rs.getString("DATE_ISSUED")).split(" ");
-                datePat = newPat[0].split("-");
-                if(currentDate[0].equals(datePat[0]) && currentDate[1].equals(datePat[1]))
-                {
-                    newPatMon++;
-                }
-                y[i] = Integer.parseInt(datePat[0]);
-                m[i] = Integer.parseInt(datePat[1]);
-            }
+//            for(int i = 0; rs.next(); i++)
+//            {
+//                java.util.Date d = rs.getDate("DATE_ISSUED");
+//                System.out.println(d);
+//                newPat = df.format(rs.getString("DATE_ISSUED")).split(" ");
+//                datePat = newPat[0].split("-");
+//                if(currentDate[0].equals(datePat[0]) && currentDate[1].equals(datePat[1]))
+//                {
+//                    newPatMon++;
+//                }
+//                y[i] = Integer.parseInt(datePat[0]);
+//                m[i] = Integer.parseInt(datePat[1]);
+//            }
             int[] monthsPat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             for (int i = 0; i < m.length; i++)
             {
