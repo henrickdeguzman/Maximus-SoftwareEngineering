@@ -22,6 +22,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static pkg124guirevision.RowPopup.ln;
 
+import java.text.NumberFormat;
+import javax.swing.text.NumberFormatter;
+
 /**
  *
  * @author renziverdb - git 
@@ -122,13 +125,11 @@ public class AddDentalRecord extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         GoBackBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        totalAmount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dentalDescription = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         amountPaidLabel = new javax.swing.JLabel();
-        amountPaid = new javax.swing.JTextField();
         addPatientInfo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -187,6 +188,20 @@ public class AddDentalRecord extends javax.swing.JFrame {
         cbLR6 = new javax.swing.JCheckBox();
         cbLR7 = new javax.swing.JCheckBox();
         cbLR8 = new javax.swing.JCheckBox();
+        NumberFormat longFormat2 = NumberFormat.getIntegerInstance();
+
+        NumberFormatter numberFormatter2 = new NumberFormatter(longFormat2);
+        numberFormatter2.setValueClass(Long.class); //optional, ensures you will always get a long value
+        numberFormatter2.setAllowsInvalid(false); //this is the key!!
+        numberFormatter2.setMinimum(0l); //Optional
+        amountPaid = new javax.swing.JFormattedTextField(numberFormatter2);
+        NumberFormat longFormat = NumberFormat.getIntegerInstance();
+
+        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
+        numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
+        numberFormatter.setAllowsInvalid(false); //this is the key!!
+        numberFormatter.setMinimum(0l); //Optional
+        totalAmount = new javax.swing.JFormattedTextField(numberFormatter);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Patient Information | Diamse - Montero Dental Clinic");
@@ -242,7 +257,6 @@ public class AddDentalRecord extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(41, 128, 185));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(totalAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 219, -1));
 
         jLabel6.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -266,7 +280,6 @@ public class AddDentalRecord extends javax.swing.JFrame {
         amountPaidLabel.setForeground(new java.awt.Color(255, 255, 255));
         amountPaidLabel.setText("Amount Paid:");
         jPanel1.add(amountPaidLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, -1, -1));
-        jPanel1.add(amountPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 219, -1));
 
         addPatientInfo.setText("Add Record");
         addPatientInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -345,12 +358,28 @@ public class AddDentalRecord extends javax.swing.JFrame {
         jPanel2.add(cbLR8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 350));
+        jPanel1.add(amountPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 220, -1));
+        jPanel1.add(totalAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 220, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     private boolean isAlpha(String text)
+    {
+        char[] c = text.toCharArray();
+        for (char ch : c)
+        {
+            if (!Character.isLetter(ch))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+     
     private void addPatientInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientInfoActionPerformed
         // TODO add your handling code here:
         
@@ -498,13 +527,22 @@ public class AddDentalRecord extends javax.swing.JFrame {
       
       if(totalAmount.getText().equals("")){
           tpay=0;
-      }else tpay = Double.parseDouble(totalAmount.getText());
+      }else {
+          
+          tpay=Double.parseDouble(totalAmount.getText());
+      }
+      
   
        if(amountPaid.getText().equals("")){
           apay=0;
-      }else apay = Double.parseDouble(amountPaid.getText());
+      }else {
+         // JOptionPane.showMessageDialog(null,"Amount should only be in numbers");
+          apay=Double.parseDouble(amountPaid.getText());
+      }//JOptionPane.showMessageDialog(null,"Amount Paid should only be in numbers");
        
-       int reply = JOptionPane.showConfirmDialog(null, "Are You sure you want to proceed with empty fields?", "", JOptionPane.YES_NO_OPTION);
+      
+       if(amountPaid.getText().equals("")||amountPaid.getText().equals("")||dentalDescription.getText().equals("")){
+        int reply = JOptionPane.showConfirmDialog(null, "Are You sure you want to proceed with empty fields?", "", JOptionPane.YES_NO_OPTION);
        if (reply == JOptionPane.YES_OPTION) {
       
       java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -519,6 +557,23 @@ public class AddDentalRecord extends javax.swing.JFrame {
         
         new PatientRecords().setVisible(true);
         super.dispose();
+       }
+      }else if(!isAlpha(amountPaid.getText())|| !isAlpha(amountPaid.getText())){
+             
+      java.util.Calendar cal = java.util.Calendar.getInstance();
+      java.util.Date utilDate = cal.getTime();
+      java.sql.Date sqlDate = new Date(utilDate.getTime());
+        String ts = ZonedDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM));
+        String event = "Added Dental Record for  Patient # "+patId+" Name: " +ln +", "+fn+".";
+        Double bal = tpay - apay;
+        AddData(tn,sqlDate, description, tpay,apay, bal,ts,event);
+        
+      
+        
+        new PatientRecords().setVisible(true);
+        super.dispose();
+       }else {
+           JOptionPane.showMessageDialog(null,"Amount should only be in numbers");
        }
         
         
@@ -570,7 +625,7 @@ public class AddDentalRecord extends javax.swing.JFrame {
     private javax.swing.JButton GoBackBtn;
     private javax.swing.JPanel HeaderPatient;
     private javax.swing.JButton addPatientInfo;
-    private javax.swing.JTextField amountPaid;
+    private javax.swing.JFormattedTextField amountPaid;
     private javax.swing.JLabel amountPaidLabel;
     private javax.swing.JCheckBox cbLL1;
     private javax.swing.JCheckBox cbLL2;
@@ -636,6 +691,6 @@ public class AddDentalRecord extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField totalAmount;
+    private javax.swing.JFormattedTextField totalAmount;
     // End of variables declaration//GEN-END:variables
 }
