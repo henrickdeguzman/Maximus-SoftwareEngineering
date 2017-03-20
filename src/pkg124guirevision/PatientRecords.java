@@ -130,7 +130,7 @@ public class PatientRecords extends javax.swing.JFrame
             //Dental Record Archive
             rs = stmt.executeQuery("SELECT * FROM DENTAL_RECORD_ARCHIVED ORDER BY PATIENT_ID");
             DefaultTableModel model3 = (DefaultTableModel) archiveDR.getModel();
-            String rowData3[] = new String[10];
+            String rowData3[] = new String[9];
             while(rs.next())
             {
                 rowData3[0] = rs.getString("PATIENT_ID");
@@ -141,8 +141,8 @@ public class PatientRecords extends javax.swing.JFrame
                 rowData3[5] = rs.getString("TOTAL_AMOUNT");
                 rowData3[6] = rs.getString("AMOUNT_PAID");
                 rowData3[7] = rs.getString("BALANCE");
-                rowData3[8] = rs.getString("DATE_ISSUED");
-                rowData3[9] = rs.getString("DATE_ARCHIVED");
+             //  rowData3[8] = rs.getString("DATE_ISSUED");  <--TRIGGERS ERROR
+                rowData3[8] = rs.getString("DATE_ARCHIVED");
                 model3.addRow(rowData3);
             }
             
