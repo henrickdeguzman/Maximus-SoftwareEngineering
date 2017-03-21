@@ -23,6 +23,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Calendar;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -113,23 +114,25 @@ public class PatientRecords extends javax.swing.JFrame
             int[] y = new int[totalPat];
             int[] m = new int[totalPat];
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat fo = new SimpleDateFormat("EEEE, MMMM dd, yyyy h:mm:ss a", Locale.ENGLISH);
             Calendar current = Calendar.getInstance();
             String[] currentTD = df.format(current.getTime()).split(" ");
             String[] currentDate = currentTD[0].split("-");
             int newPatMon = 0;
-//            for(int i = 0; rs.next(); i++)
-//            {
-//                java.util.Date d = rs.getDate("DATE_ISSUED");
-//                System.out.println(d);
-//                newPat = df.format(rs.getString("DATE_ISSUED")).split(" ");
-//                datePat = newPat[0].split("-");
-//                if(currentDate[0].equals(datePat[0]) && currentDate[1].equals(datePat[1]))
-//                {
-//                    newPatMon++;
-//                }
-//                y[i] = Integer.parseInt(datePat[0]);
-//                m[i] = Integer.parseInt(datePat[1]);
-//            }
+            for(int i = 0; rs.next(); i++)
+            {
+                String dateIssued = rs.getString("DATE_ISSUED"); //Monday, March 20, 2017 1:30:30 AM
+                java.util.Date formatted = fo.parse(dateIssued);
+                //System.out.println(df.format(formatted));
+                newPat = df.format(formatted).split(" ");
+                datePat = newPat[0].split("-");
+                if(currentDate[0].equals(datePat[0]) && currentDate[1].equals(datePat[1]))
+                {
+                    newPatMon++;
+                }
+                y[i] = Integer.parseInt(datePat[0]);
+                m[i] = Integer.parseInt(datePat[1]);
+            }
             int[] monthsPat = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             for (int i = 0; i < m.length; i++)
             {
