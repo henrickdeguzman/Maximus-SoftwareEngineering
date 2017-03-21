@@ -109,7 +109,7 @@ public class PatientRecords extends javax.swing.JFrame
             }
             clck();
             
-            //report
+            //monthly patient report
             rs = stmt.executeQuery("SELECT * FROM PATIENT_RECORD ORDER BY PATIENT_ID");
             int[] y = new int[totalPat];
             int[] m = new int[totalPat];
@@ -175,48 +175,133 @@ public class PatientRecords extends javax.swing.JFrame
                         monthsPat[11]++;
                 }
             }
+            //monthly income report
+            rs = stmt.executeQuery("SELECT * FROM DENTAL_RECORD");
+            int countRS = 0;
+            while(rs.next())
+            {
+                countRS++;
+            }
+            int[] monthsInc = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            int[] mo = new int[countRS];
+            int[] ye = new int[countRS];
+            rs = stmt.executeQuery("SELECT * FROM DENTAL_RECORD");
+            for(int i = 0; rs.next(); i++)
+            {
+                String sqlDate = rs.getString("PATIENT_DATE");
+                System.out.println(sqlDate);
+                newPat = sqlDate.split(" ");
+                datePat = newPat[0].split("-");
+                ye[i] = Integer.parseInt(datePat[0]);
+                mo[i] = Integer.parseInt(datePat[1]);
+            }
+            rs = stmt.executeQuery("SELECT * FROM DENTAL_RECORD");
+            for (int i = 0; rs.next(); i++)
+            {
+                switch (mo[i])
+                {
+                    case 1:
+                        monthsInc[0] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 2:
+                        monthsInc[1] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 3:
+                        monthsInc[2] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 4:
+                        monthsInc[3] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 5:
+                        monthsInc[4] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 6:
+                        monthsInc[5] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 7:
+                        monthsInc[6] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 8:
+                        monthsInc[7] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 9:
+                        monthsInc[8] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 10:
+                        monthsInc[9] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    case 11:
+                        monthsInc[10] += rs.getInt("TOTAL_AMOUNT");
+                        break;
+                    default:
+                        monthsInc[11] += rs.getInt("TOTAL_AMOUNT");
+                }
+            }
+            //total ammount
+            int total = 0;
+            for(int i = 0; i < monthsInc.length; i++)
+            {
+                total += monthsInc[i];
+            }
             //set monthly table
             DefaultTableModel monthly = (DefaultTableModel) TABLE4.getModel();
-            String rowDataMonth[] = new String[2];
+            String rowDataMonth[] = new String[3];
             rowDataMonth[0] = "January";
             rowDataMonth[1] = "" + monthsPat[0];
+            rowDataMonth[2] = "" + monthsInc[0];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "February";
             rowDataMonth[1] = "" + monthsPat[1];
+            rowDataMonth[2] = "" + monthsInc[1];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "March";
             rowDataMonth[1] = "" + monthsPat[2];
+            rowDataMonth[2] = "" + monthsInc[2];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "April";
             rowDataMonth[1] = "" + monthsPat[3];
+            rowDataMonth[2] = "" + monthsInc[3];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "May";
             rowDataMonth[1] = "" + monthsPat[4];
+            rowDataMonth[2] = "" + monthsInc[4];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "June";
             rowDataMonth[1] = "" + monthsPat[5];
+            rowDataMonth[2] = "" + monthsInc[5];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "July";
-            rowDataMonth[1] = "" + monthsPat[6];;
+            rowDataMonth[1] = "" + monthsPat[6];
+            rowDataMonth[2] = "" + monthsInc[6];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "August";
             rowDataMonth[1] = "" + monthsPat[7];
+            rowDataMonth[2] = "" + monthsInc[7];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "September";
             rowDataMonth[1] = "" + monthsPat[8];
+            rowDataMonth[2] = "" + monthsInc[8];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "October";
             rowDataMonth[1] = "" + monthsPat[9];
+            rowDataMonth[2] = "" + monthsInc[9];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "November";
             rowDataMonth[1] = "" + monthsPat[10];
+            rowDataMonth[2] = "" + monthsInc[10];
             monthly.addRow(rowDataMonth);
             rowDataMonth[0] = "December";
             rowDataMonth[1] = "" + monthsPat[11];
+            rowDataMonth[2] = "" + monthsInc[11];
             monthly.addRow(rowDataMonth);
+            
+            //average
+            int ave = total / 12;
             
             NP_Count1.setText("" + newPatMon);
             TP_Count1.setText("" + totalPat);
+            PV_Count1.setText("P " + ave);
+            MonthlyIncome.setText("P "+ total);
             
             //Appointment
             rs = stmt.executeQuery("SELECT * FROM APPOINTMENT ORDER BY APP_ID");
@@ -690,7 +775,6 @@ public class PatientRecords extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Diamse-Montero Dental Clinic");
-        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Header.setBackground(new java.awt.Color(52, 152, 219));
@@ -845,7 +929,7 @@ public class PatientRecords extends javax.swing.JFrame
                     .addComponent(searchBtnDental)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addDentalRecord)
                 .addGap(11, 11, 11))
@@ -1158,7 +1242,7 @@ public class PatientRecords extends javax.swing.JFrame
 
         NP_Count1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         NP_Count1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NP_Count1.setText("7");
+        NP_Count1.setText("0");
         NP_Count1.setToolTipText("");
         NP_Count1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1229,7 +1313,7 @@ public class PatientRecords extends javax.swing.JFrame
 
         TP_Count1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         TP_Count1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TP_Count1.setText("30");
+        TP_Count1.setText("0");
         TP_Count1.setToolTipText("");
         TP_Count1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1564,7 +1648,7 @@ public class PatientRecords extends javax.swing.JFrame
                     .addComponent(historyDateToday))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         MainTab.addTab("Transaction History", jPanel4);
